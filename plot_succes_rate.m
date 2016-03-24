@@ -1,5 +1,6 @@
 % Plot the mean succes rates of all stimulus time points over the simulus
-% intensity, for every cell in a different subplot. PAS 02-03-2016
+% intensity, for every cell in a different subplot. PAS 02-03-2016. git
+% test
 
 function suc_plot=plot_succes_rate(analysis_ctrl, analysis_LTG)
 
