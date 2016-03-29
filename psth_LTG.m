@@ -91,6 +91,7 @@ for cell=[which_cells];
         hold on
         histogram(comb_PST_LTG,0:window,'FaceColor','r') 
         a=num2str(analysis_ctrl{1, cell}(1).laser_intensity(sweep));
+        axis([0 10 0 75]);
         xlabel('Post stimulus time (ms)');
         ylabel('nr of spikes');
         title(['stimulus intensity: ' a]);
@@ -104,7 +105,7 @@ for cell=[which_cells];
         hold on
         plot(c_PST_LTG,'r*')
         xlabel('Stimulus number');
-        ylabel('Post stimulus time (ms)');
+        ylabel('pst (ms)');
         title(['stimulus intensity: ' a]);
 %        legend('Control', 'LTG');
     end
