@@ -5,7 +5,7 @@
 % within. Outputs are post-stimulus time histograms of control and LTG conditions
 % per sweep in a subplot and per cell in a new window.  PAS 03-14-2016
 
-function psth_plot=psthpiet(analysis_ctrl, analysis_LTG, which_cells, which_traces, window)
+function psth_plot=psth_LTG(analysis_ctrl, analysis_LTG, which_cells, which_traces, window)
 
 % Plot in a new figure for each new cell
 for cell=[which_cells];
