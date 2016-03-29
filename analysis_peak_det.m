@@ -1,4 +1,4 @@
-
+%Git test
 function [data]=analysis_peak_det (exper,delta_in_peakdet)
 % analysis structures data from exper files, gives a struct containing the times of laser stimulations and detected peaks by peakdet.  
 % delta_in_peakdet=delta in peakdetection usualy in action potentials 0.3
