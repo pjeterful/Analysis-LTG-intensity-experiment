@@ -18,7 +18,7 @@ for cell=1:nr_cells;
     mn_LTG=analysis_LTG{1,cell}.mean_succes_rate;
     % Plot the current cell and create correpsponding axis labels, 
     % axis values,  legend, title and set the axis
-    plot(las_ctrl ,mn_ctrl,'b');
+    plot(las_ctrl ,mn_ctrl,'k');
     plot(las_LTG, mn_LTG, 'r');
     xlabel('stimulus intensity (%)');
     ylabel('succes rate');

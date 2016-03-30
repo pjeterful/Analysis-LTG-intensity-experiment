@@ -17,7 +17,7 @@ for cell=[which_cells];
         cs_LTG=analysis_LTG{1, cell}(sweep).running_average_succes;
         % Plot the current sweep of the current cell and create axis
         % labels, legend, title and set the axis
-        plot(cs_ctrl,'bo');
+        plot(cs_ctrl,'ko');
         plot(cs_LTG, 'ro');
         xlabel('stimulus nr');
         ylabel('running succes rate');
