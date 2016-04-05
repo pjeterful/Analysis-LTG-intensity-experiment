@@ -27,11 +27,11 @@ for cell=which_cells;
     y_ctrl=y_ctrl';
     z_ctrl=z_ctrl';
    
-    z_LTG=z_LTG';
+    z_LTG=z_ctrl-z_LTG';
     
     x=x_ctrl;
     y=y_ctrl;
-    z=z_ctrl-z_LTG;
+    z=z_LTG;
     M=surf(y,x,z);
     ylabel('Laser intensity (%)');
     xlabel('Stimulus number');
