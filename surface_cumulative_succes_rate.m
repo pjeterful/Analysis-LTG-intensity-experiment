@@ -1,4 +1,11 @@
-   function surf_c_suc_plot=surface_cumulative_succes_rate(analysis_ctrl, analysis_LTG, which_cells, reduction)
+%Create a surface plot of the difference in cumulative firing probability against
+%all stimulus intensities and stimulus numbers. Inputs areanalysis ctrl and
+%LTG structs, which cells you would like to plot [], and which part of the
+%plot you would like to cut of at the end if there is a lack of interesting
+%points, make this 0 at the first run to see if its aplicable.
+%Created 2016 PAS
+
+function surf_c_suc_plot=surface_cumulative_succes_rate(analysis_ctrl, analysis_LTG, which_cells, reduction)
 
 for cell=which_cells;
     

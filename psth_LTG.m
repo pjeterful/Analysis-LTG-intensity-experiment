@@ -1,4 +1,4 @@
-% Calcutlate the post stimulus times of all the first peak times following a
+% Calculate the post stimulus times of all the first peak times following a
 % laser stimulation and plot a post-stimulus time histogram. inputs are an
 % analysis struct, the cell number of interest, the sweep number of
 % interest, and a time window (ms) where the respons peak must fall

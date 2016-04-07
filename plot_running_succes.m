@@ -1,3 +1,8 @@
+%Plot the running succes rates in a separte figure for each cell and a
+%seperate subplot for each stimulus intesnity. input is a analysis ctrl and
+%LTG struct and which cells you would like to have plotted. Outputs are
+%plots of all runnign succes rates.
+%Created 30-06-2016 PAS 
 function run_av_suc_plot=plot_running_succes(analysis_ctrl, analysis_LTG, which_cells)
 
 % Create a new figure for each cell

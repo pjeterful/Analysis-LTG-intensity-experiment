@@ -1,3 +1,6 @@
+%Use this function if both ctrl and LTG files have the same size, otherwise
+%use spike_analysis_LTG2.
+
 % Analyse electrophysiological data acquired with NEURON matlab program.
 % Input files must be devided in two folders, control and LTG condition. 
 % This function detects spikes and registers if they fall within a given spike
