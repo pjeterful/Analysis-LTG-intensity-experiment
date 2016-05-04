@@ -20,6 +20,7 @@ for cell=[which_cells];
         % and sweep
         cs_ctrl=analysis_ctrl{1, cell}(sweep).running_average_succes;
         cs_LTG=analysis_LTG{1, cell}(sweep).running_average_succes;
+        x=size(analysis_ctrl{1, cell}(2).laser_peaks ,1)+1;
         % Plot the current sweep of the current cell and create axis
         % labels, legend, title and set the axis
         plot(cs_ctrl,'ko');
@@ -29,6 +30,6 @@ for cell=[which_cells];
         legend('control','LTG');
         a=num2str(analysis_ctrl{1, cell}(1).laser_intensity(sweep));
         title(['stimulus intensity: ' a]);
-        axis([0 32 0 1])
+        axis([0 x 0 1])
     end
 end

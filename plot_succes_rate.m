@@ -9,7 +9,7 @@ nr_cells=size(analysis_ctrl,2);
 
 % Make a subplot for each cell
 for cell=1:nr_cells;
-    subplot(ceil(sqrt(nr_cells)), floor(sqrt(nr_cells)),cell);
+    subplot(ceil(sqrt(nr_cells)), ceil(sqrt(nr_cells)),cell);
     hold on
     % Set x and y values of the current cell for ctrl and LTG conditions
     las_ctrl=analysis_ctrl{1,cell}.laser_intensity;
@@ -23,6 +23,6 @@ for cell=1:nr_cells;
     xlabel('stimulus intensity (%)');
     ylabel('succes rate');
     legend('control','LTG');
-    title(['PV neuron: ' num2str(cell)]);
+    title(['neuron: ' num2str(cell)]);
     axis([las_LTG(1), las_LTG(size(las_LTG,1)), 0, 1]);
 end

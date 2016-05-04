@@ -84,14 +84,14 @@ for cell=[which_cells];
         % Combine all repeats into one aray     
         comb_PST_LTG=[PST_LTG{1,1};PST_LTG{1,2};PST_LTG{1,3}];
         c_PST_LTG=[PST_LTG{1,1},PST_LTG{1,2},PST_LTG{1,3}];
-         
+        x=size(analysis_ctrl{1, cell}(2).laser_peaks ,1);
         %Plot the control and LTG post-stimulus times in a histogram of the
         %current cell and sweep. And add titels, legends etc.
         histogram(comb_PST_ctrl,0:window,'FaceColor','k')
         hold on
         histogram(comb_PST_LTG,0:window,'FaceColor','r') 
         a=num2str(analysis_ctrl{1, cell}(1).laser_intensity(sweep));
-        axis([0 10 0 75]);
+        axis([0 window 0 20]);
         xlabel('Post stimulus time (ms)');
         ylabel('nr of spikes');
         title(['stimulus intensity: ' a]);
@@ -103,7 +103,7 @@ for cell=[which_cells];
         subplot(nr_sw,2,c);
         plot(c_PST_ctrl,'k*')
         hold on
-        axis([0 33 0 10]); 
+        axis([0 x 0 window]); 
         plot(c_PST_LTG,'r*')
         xlabel('Stimulus number');
         ylabel('pst (ms)');
