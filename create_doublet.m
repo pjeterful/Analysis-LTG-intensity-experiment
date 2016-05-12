@@ -2,7 +2,7 @@
 %sweep, this variable containes the number of spikes following a laser
 %stimulus puls within a giving window. This will be given for each repeat
 %and in the last column the average. Input is an analysis_ctrl and LTG
-%file, and a timewindow (ms) after the alser within which the spikes should be counted.
+%file, and a timewindow (ms) after the laser within which the spikes should be counted.
 
 function [analysis_ctrl, analysis_LTG]=create_doublet(analysis_ctrl, analysis_LTG, window)
 
@@ -30,7 +30,7 @@ for cell=1:size(analysis_ctrl,2);
         end
         % Calculate the mean amount of spikes of all repeats per sweep and
         % cell. Place this value in the last column.
-        analysis_ctrl{1,cell}(sweep).nr_spikes(:,4)=mean(analysis_ctrl{1,cell}(sweep).nr_spikes,2);
+        analysis_ctrl{1,cell}(sweep).nr_spikes(:,4)=mean(analysis_ctrl{1,cell}(sweep).nr_spikes,2);  
     end
 end
 
