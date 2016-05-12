@@ -4,7 +4,7 @@ for cell=[which_cells];
         for repeat=1:size(analysis{1, cell}(sweep).spike_trace,2);
             v=analysis{1, cell}(sweep).spike_trace(:,repeat) ;
             x=analysis{1, cell}(sweep).time;
-            temp{1,cell}(sweep).det_peaks{repeat}(:,2:3)=...
+            temp{1,cell}(sweep).det_peaks{repeat}=...
             peakdet(v,delta,x);
         end
         temp{1,cell}(sweep).spike_trace=analysis{1, cell}(sweep).spike_trace;
