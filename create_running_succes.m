@@ -20,11 +20,12 @@ for cell=1:size(analysis_ctrl,2);
         %Cut of the acces values created by the moving average at the end
         analysis_ctrl{1,cell}(sweep).running_average_succes=analysis_ctrl{1,cell}(sweep).running_average_succes(1:(sctrl-window+1));
         %Because the running avregages are devided by the window, the values 
-        %without a complete window should be multiplicated by the wondow*
+        %without a complete window should be multiplicated by the window*
         %the number values in the window at that point.
         analysis_ctrl{1,cell}(sweep).running_average_succes(1,1)=analysis_ctrl{1,cell}(sweep).running_average_succes(1,1)*window;
         analysis_ctrl{1,cell}(sweep).running_average_succes(2,1)=analysis_ctrl{1,cell}(sweep).running_average_succes(2,1)/2*window;
         analysis_ctrl{1,cell}(sweep).running_average_succes(3,1)=analysis_ctrl{1,cell}(sweep).running_average_succes(3,1)/3*window;
+        analysis_ctrl{1,cell}(sweep).running_average_succes(4,1)=analysis_ctrl{1,cell}(sweep).running_average_succes(4,1)/4*window;
 %add another one of these lines above if you want to use a window larger than 4,
 %and add one to all the row positions within the brackets.
     end
@@ -44,6 +45,7 @@ analysis_LTG{1,cell}(sweep).running_average_succes=analysis_LTG{1,cell}(sweep).r
 analysis_LTG{1,cell}(sweep).running_average_succes(1,1)=analysis_LTG{1,cell}(sweep).running_average_succes(1,1)*window;
 analysis_LTG{1,cell}(sweep).running_average_succes(2,1)=analysis_LTG{1,cell}(sweep).running_average_succes(2,1)/2*window;
 analysis_LTG{1,cell}(sweep).running_average_succes(3,1)=analysis_LTG{1,cell}(sweep).running_average_succes(3,1)/3*window;
+analysis_LTG{1,cell}(sweep).running_average_succes(4,1)=analysis_LTG{1,cell}(sweep).running_average_succes(4,1)/4*window;
 %add another one of these lines above if you want to use a window larger than 4,
 %and add one to all the row positions within the brackets.
     end

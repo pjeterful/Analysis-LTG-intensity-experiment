@@ -2,8 +2,8 @@
 % For current values of below 0, the weibull fit doesn't comply.
 % Input to function is two vectors (x and y)
 % Output is a fit, two vectors and X50 and Y50 values.
-
-function [dblThreshold, xThreshold, vecFitX, vecFitY, cFit] = gaussian_fit(currents,freq_values)
+%[dblThreshold, xThreshold, vecFitX, vecFitY, cFit] = gaussian_fit(currents,freq_values)
+function [dblThreshold, xThreshold, cFit] = gaussian_fit(currents,freq_values)
 
 % X and Y values of points to perform fit on.
 % Here derive them form the IF_folder_runner function

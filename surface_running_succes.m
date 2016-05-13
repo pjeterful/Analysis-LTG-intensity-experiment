@@ -4,7 +4,7 @@
 %plot you would like to cut of at the end if there is a lack of interesting
 %points, make this 0 at the first run to see if its aplicable.
 %Created 2016 PAS
-function surf_run_suc_plot=surface_running_succes(analysis_ctrl, analysis_LTG, [which_cells], reduction)
+function surf_run_suc_plot=surface_running_succes(analysis_ctrl, analysis_LTG, which_cells, reduction)
 
 for cell=which_cells;
     
@@ -23,7 +23,7 @@ for cell=which_cells;
     for sweep=1:(nr_sweeps-red);     
         z_ctrl(:,sweep)=analysis_ctrl{1, cell}(sweep+1).running_average_succes;
         z_LTG(:,sweep)=analysis_LTG{1, cell}(sweep+1).running_average_succes;
-        y_ctrl(:,sweep)=1:(size(analysis_ctrl{1, 6}(2).laser_peaks,1)-4);
+        y_ctrl(:,sweep)=1:(size(analysis_ctrl{1, 6}(2).laser_peaks,1));
     end
     
     max=(size(analysis_ctrl{1, cell}(1).laser_intensity,1));
