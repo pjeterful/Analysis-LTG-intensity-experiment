@@ -28,6 +28,8 @@ for cell=1:size(analysis_ctrl,2);
                 end
             end
         end
+        % Ceate a mean per sweep
+        analysis_ctrl{1,cell}(1).mean_nr_spikes(sweep,1)=mean(mean(analysis_ctrl{1,cell}(sweep).nr_spikes));
         % Calculate the mean amount of spikes of all repeats per sweep and
         % cell. Place this value in the last column.
         analysis_ctrl{1,cell}(sweep).nr_spikes(:,4)=mean(analysis_ctrl{1,cell}(sweep).nr_spikes,2); 
@@ -64,8 +66,12 @@ for cell=1:size(analysis_LTG,2);
                 end
             end
         end
+        % Ceate a mean per sweep
+        analysis_LTG{1,cell}(1).mean_nr_spikes(sweep,1)=mean(mean(analysis_LTG{1,cell}(sweep).nr_spikes));
+        % Calculate the mean amount of spikes of all repeats per sweep and
+        % cell. Place this value in the last column.
         analysis_LTG{1,cell}(sweep).nr_spikes(:,4)=mean(analysis_LTG{1,cell}(sweep).nr_spikes,2);
-        %create a running average of the douclets
+        %create a running average of the doublets
         av_doublet_LTG=analysis_LTG{1,cell}(sweep).nr_spikes(:,4)';
         mask= ones (1,5)/5;
         analysis_LTG{1,cell}(sweep).running_average_nr_spikes=conv(av_doublet_LTG, mask)';
