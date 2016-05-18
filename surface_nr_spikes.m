@@ -2,12 +2,12 @@
 %all stimulus intensities and stimulus numbers. Inputs are analysis ctrl and
 %LTG structs, which cells you would like to plot [], 
 %Created 18-05-2016 PAS
-function surf_run_suc_plot=surface_nr_spikes(analysis_ctrl, analysis_LTG, which_cells)
+function surf_nr_spikes_plot=surface_nr_spikes(analysis_ctrl, analysis_LTG, which_cells)
 
 for cell=which_cells;
     
     nr_sweeps=size(analysis_ctrl{1, cell},2)-1;
-    nr_stim=size(analysis_ctrl{1, cell}(1).running_nr_spikes,1);  
+    nr_stim=size(analysis_ctrl{1, cell}(1).running_average_nr_spikes,1);  
     %Clear all preexisting values
    clear x
    clear z
@@ -17,9 +17,9 @@ for cell=which_cells;
    clear z_ctrl
    clear z_LTG
 %Create z and y values for ctrl and LTG
-    for sweep=1:(nr_sweeps;     
-        z_ctrl(:,sweep)=analysis_ctrl{1, cell}(sweep+1).running_nr_spikes;
-        z_LTG(:,sweep)=analysis_LTG{1, cell}(sweep+1).running_nr_spikes;
+    for sweep=1:nr_sweeps;     
+        z_ctrl(:,sweep)=analysis_ctrl{1, cell}(sweep+1).running_average_nr_spikes;
+        z_LTG(:,sweep)=analysis_LTG{1, cell}(sweep+1).running_average_nr_spikes;
         y_ctrl(:,sweep)=1:(size(analysis_ctrl{1, 6}(2).laser_peaks,1));
     end
     

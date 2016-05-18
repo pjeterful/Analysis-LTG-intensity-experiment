@@ -1,5 +1,5 @@
-% Plot the mean succes rates of all stimulus time points over the simulus
-% intensity, for every cell in a different subplot. PAS 02-03-2016. 
+% Plot the mean nr of spikes of all stimulus time points over the simulus
+% intensity, for every cell in a different subplot. PAS 18-05-2016. 
 
 
 function nr_spikes_plot=plot_nr_spikes(analysis_ctrl, analysis_LTG)

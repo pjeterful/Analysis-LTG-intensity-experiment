@@ -1,8 +1,8 @@
-%Plot the running succes rates in a separte figure for each cell and a
+%Plot the running nr of spikes in a separte figure for each cell and a
 %seperate subplot for each stimulus intesnity. input is a analysis ctrl and
 %LTG struct and which cells you would like to have plotted. Outputs are
-%plots of all runnign succes rates.
-%Created 30-06-2016 PAS 
+%plots of all running avregaes of nr of spikes.
+%Created 18-05-2016 PAS 
 function run_nr_spikes_plot=plot_running_nr_spikes(analysis_ctrl, analysis_LTG, which_cells)
 
 % Create a new figure for each cell
