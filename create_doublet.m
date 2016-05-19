@@ -2,10 +2,12 @@
  %sweep, this variable containes the number of spikes following a laser
  %stimulus puls within a giving window. This will be given for each repeat
  %and in the last column the average. Input is an analysis_ctrl and LTG
- %file, and a timewindow (ms) after the laser within which the spikes should be counted.
+ %file, a timewindow (ms) after the laser within which the spikes should be counted
+ %and the size of the reading frame of the running average, the standard
+ %value for the frame is 5.
  %created 14-5-2016.
  
- function [analysis_ctrl, analysis_LTG]=create_doublet(analysis_ctrl, analysis_LTG, window)
+ function [analysis_ctrl, analysis_LTG]=create_doublet(analysis_ctrl, analysis_LTG, window, frame)
  
  for cell=1:size(analysis_ctrl,2);
      for sweep=1:size(analysis_ctrl{1,cell},2);  
@@ -30,24 +32,28 @@
              end
          end
        % Ceate a mean per sweep
-         analysis_ctrl{1,cell}(1).mean_nr_spikes(sweep,1)=mean(mean(analysis_ctrl{1,cell}(sweep).nr_spikes));
+         analysis_ctrl{1,cell}(1).mean_nr_spikes(sweep,1)=...
+         mean(mean(analysis_ctrl{1,cell}(sweep).nr_spikes));
          % Calculate the mean amount of spikes of all repeats per sweep and
          % cell. Place this value in the last column.
-         analysis_ctrl{1,cell}(sweep).nr_spikes(:,4)=mean(analysis_ctrl{1,cell}(sweep).nr_spikes,2); 
+         analysis_ctrl{1,cell}(sweep).nr_spikes(:,4)=...
+         mean(analysis_ctrl{1,cell}(sweep).nr_spikes,2); 
          %create a running average of the douclets
          av_doublet_ctrl=analysis_ctrl{1,cell}(sweep).nr_spikes(:,4)';
-         mask= ones (1,5)/5;
-         analysis_ctrl{1,cell}(sweep).running_average_nr_spikes=conv(av_doublet_ctrl, mask)';
+         mask= ones (1,frame)/frame;
+         analysis_ctrl{1,cell}(sweep).running_average_nr_spikes=...
+         conv(av_doublet_ctrl, mask)';
          sctrl=size(analysis_ctrl{1,cell}(sweep).running_average_nr_spikes,1);
          %Cut of the acces values created by the moving average at the end
-         analysis_ctrl{1,cell}(sweep).running_average_nr_spikes=analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(1:(sctrl-5+1));
+         analysis_ctrl{1,cell}(sweep).running_average_nr_spikes=...
+         analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(1:(sctrl-frame+1));
          %Because the running avregages are devided by the window, the values 
          %without a complete window should be multiplicated by the window*
          %the number values in the window at that point.
-         analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(1,1)=analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(1,1)*5;
-         analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(2,1)=analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(2,1)/2*5;
-         analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(3,1)=analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(3,1)/3*5;
-         analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(4,1)=analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(4,1)/4*5;
+         for f=1:frame;
+            analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(f,1)=...
+            analysis_ctrl{1,cell}(sweep).running_average_nr_spikes(f,1)/f*frame;
+         end
      end
  end
  
@@ -68,24 +74,28 @@
              end
          end
        % Ceate a mean per sweep
-         analysis_LTG{1,cell}(1).mean_nr_spikes(sweep,1)=mean(mean(analysis_LTG{1,cell}(sweep).nr_spikes));
+         analysis_LTG{1,cell}(1).mean_nr_spikes(sweep,1)=...
+         mean(mean(analysis_LTG{1,cell}(sweep).nr_spikes));
        % Calculate the mean amount of spikes of all repeats per sweep and
        % cell. Place this value in the last column.
-         analysis_LTG{1,cell}(sweep).nr_spikes(:,4)=mean(analysis_LTG{1,cell}(sweep).nr_spikes,2);
+         analysis_LTG{1,cell}(sweep).nr_spikes(:,4)=...
+         mean(analysis_LTG{1,cell}(sweep).nr_spikes,2);
        % Create a running average of the doublets
          av_doublet_LTG=analysis_LTG{1,cell}(sweep).nr_spikes(:,4)';
-         mask= ones (1,5)/5;
-         analysis_LTG{1,cell}(sweep).running_average_nr_spikes=conv(av_doublet_LTG, mask)';
-                  sLTG=size(analysis_LTG{1,cell}(sweep).running_average_nr_spikes,1);
+         mask= ones (1,frame)/frame;
+         analysis_LTG{1,cell}(sweep).running_average_nr_spikes=...
+         conv(av_doublet_LTG, mask)';
+         sLTG=size(analysis_LTG{1,cell}(sweep).running_average_nr_spikes,1);
          %Cut of the acces values created by the moving average at the end
-         analysis_LTG{1,cell}(sweep).running_average_nr_spikes=analysis_LTG{1,cell}(sweep).running_average_nr_spikes(1:(sLTG-5+1));
+         analysis_LTG{1,cell}(sweep).running_average_nr_spikes=...
+         analysis_LTG{1,cell}(sweep).running_average_nr_spikes(1:(sLTG-frame+1));
          %Because the running avregages are devided by the window, the values 
          %without a complete window should be multiplicated by the window*
          %the number values in the window at that point.
-         analysis_LTG{1,cell}(sweep).running_average_nr_spikes(1,1)=analysis_LTG{1,cell}(sweep).running_average_nr_spikes(1,1)*5;
-         analysis_LTG{1,cell}(sweep).running_average_nr_spikes(2,1)=analysis_LTG{1,cell}(sweep).running_average_nr_spikes(2,1)/2*5;
-         analysis_LTG{1,cell}(sweep).running_average_nr_spikes(3,1)=analysis_LTG{1,cell}(sweep).running_average_nr_spikes(3,1)/3*5;
-         analysis_LTG{1,cell}(sweep).running_average_nr_spikes(4,1)=analysis_LTG{1,cell}(sweep).running_average_nr_spikes(4,1)/4*5;
+         for f=1:frame;
+            analysis_LTG{1,cell}(sweep).running_average_nr_spikes(f,1)=...
+            analysis_LTG{1,cell}(sweep).running_average_nr_spikes(f,1)/f*frame;
+         end
      end
  end
  end   
