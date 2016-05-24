@@ -11,14 +11,6 @@ for cell=which_cells;
     red=reduction;
     nr_sweeps=size(analysis_ctrl{1, cell},2)-1;
     nr_stim=size(analysis_ctrl{1, cell}(1).running_average_succes,1);  
-    %Clear all preexisting values
-   clear x
-   clear z
-   clear y
-   clear x_ctrl
-   clear y_ctrl
-   clear z_ctrl
-   clear z_LTG
 %Create z and y values for ctrl and LTG
     for sweep=1:(nr_sweeps-red);     
         z_ctrl(:,sweep)=analysis_ctrl{1, cell}(sweep+1).running_average_succes;
@@ -44,8 +36,9 @@ for cell=which_cells;
     z=z_LTG;
     %Plot the surface plot and label the axis.
     M=surf(y,x,z);
+    colormap(gray(10));
     ylabel('Laser intensity (%)');
     xlabel('Stimulus number');
-    zlabel('LTG effect on firing probability');
+    zlabel('LTG effect on firing probability'); 
 end
 end

@@ -24,5 +24,5 @@ for cell=1:nr_cells;
     ylabel('succes rate');
     legend('control','LTG');
     title(['neuron: ' num2str(cell)]);
-    axis([las_LTG(1), las_LTG(size(las_LTG,1)), 0, 4]);
+    axis([las_LTG(1), las_LTG(size(las_LTG,1)), 0, 2]);
 end
