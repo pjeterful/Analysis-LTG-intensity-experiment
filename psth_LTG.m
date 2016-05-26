@@ -12,7 +12,7 @@ for cell=[which_cells];
     figure(cell);
     nr_sw=size(which_traces,2);
     c=0;
-   % Plot in a new subplot for each new sweep
+    % Plot in a new subplot for each new sweep
     for sweep=[which_traces];
         c=c+1;       
         subplot(nr_sw,2,c);
@@ -91,7 +91,7 @@ for cell=[which_cells];
         hold on
         histogram(comb_PST_LTG,0:window,'FaceColor','r') 
         a=num2str(analysis_ctrl{1, cell}(1).laser_intensity(sweep));
-        axis([0 window 0 20]);
+        axis([0 window 0 25]);
         xlabel('Post stimulus time (ms)');
         ylabel('nr of spikes');
         title(['stimulus intensity: ' a]);
@@ -108,7 +108,7 @@ for cell=[which_cells];
         xlabel('Stimulus number');
         ylabel('pst (ms)');
         title(['stimulus intensity: ' a]);
-%        legend('Control', 'LTG');
+%       legend('Control', 'LTG');
     end
 end
 end

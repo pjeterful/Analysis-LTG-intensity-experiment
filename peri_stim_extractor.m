@@ -29,7 +29,7 @@ for repeat = 1:size(vector,2)
             peri_stim_traces(v_stim,:,1,repeat)  = vector(pre_wind:post_wind,repeat)';
             peri_stim_traces(v_stim,:,2,repeat)  = times(pre_wind:post_wind)';
             peri_stim_traces(v_stim,:,3,repeat)  = times(pre_wind:post_wind)-times(time_ind)';
-            % plot(peri_stim_traces(stim,:,3),peri_stim_traces(stim,:,1))
+            %plot(peri_stim_traces(stim,:,3),peri_stim_traces(stim,:,1));
         end
     end
 
