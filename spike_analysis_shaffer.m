@@ -27,15 +27,15 @@ for fil = 3:2:size(ctrl_files);
     LTG_exper_EPIO=exper;
     
     for sweep=1:size(ctrl_exper_IF,2);
-        analysis_ctrl{fil-2}(sweep).time_IF=ctrl_exper_IF(sweep).time;
-        analysis_ctrl{fil-2}(sweep).trace_IF=ctrl_exper_IF(sweep).v_rec;
-        analysis_LTG{fil-2}(sweep).time_IF=LTG_exper_IF(sweep).time;
-        analysis_LTG{fil-2}(sweep).trace_IF=LTG_exper_IF(sweep).v_rec;
+        analysis_ctrl{ceil((fil-2)/2)}(sweep).time_IF=ctrl_exper_IF(sweep).time;
+        analysis_ctrl{ceil((fil-2)/2)}(sweep).trace_IF=ctrl_exper_IF(sweep).v_rec;
+        analysis_LTG{ceil((fil-2)/2)}(sweep).time_IF=LTG_exper_IF(sweep).time;
+        analysis_LTG{ceil((fil-2)/2)}(sweep).trace_IF=LTG_exper_IF(sweep).v_rec;
     for sweep=1:size(ctrl_exper_EPIO,2);
-        analysis_ctrl{fil-2}(sweep).time_EPIO=ctrl_exper_EPIO(sweep).time;
-        analysis_ctrl{fil-2}(sweep).trace_EPIO=ctrl_exper_EPIO(sweep).v_rec;
-        analysis_LTG{fil-2}(sweep).time_EPIO=LTG_exper_EPIO(sweep).time;
-        analysis_LTG{fil-2}(sweep).trace_EPIO=LTG_exper_EPIO(sweep).v_rec;
+        analysis_ctrl{ceil((fil-2)/2)}(sweep).time_EPIO=ctrl_exper_EPIO(sweep).time;
+        analysis_ctrl{ceil((fil-2)/2)}(sweep).trace_EPIO=ctrl_exper_EPIO(sweep).v_rec;
+        analysis_LTG{ceil((fil-2)/2)}(sweep).time_EPIO=LTG_exper_EPIO(sweep).time;
+        analysis_LTG{ceil((fil-2)/2)}(sweep).trace_EPIO=LTG_exper_EPIO(sweep).v_rec;
     end
 end
 end

@@ -41,7 +41,7 @@ for cell=which_cells;
     %Plot the surface plot and label the axis.
     M=surf(y,x,z);
     caxis([ 0 2]);
-    colormap(flipud(gray(10)));
+    colormap(flipud(autumn(10)));
     ylabel('Laser intensity (%)');
     xlabel('Stimulus number');
     zlabel('LTG effect on nr of spikes');

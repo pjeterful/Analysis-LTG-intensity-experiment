@@ -76,7 +76,7 @@ for fil = (3+ismac):size(metingfiles,1)
 
     % Create time array with times scaled to millisecond, do for all traces
     % Use the sec_2_ms scaling to get to the right timescale
-    sec_ 2_ms      = 1000;
+    sec_2_ms      = 1000;
     for sweeps = 1:meta.nr_sweeps
         exper(sweeps).time = (([1:1:length(Meting(1,1).adc(:,1))]'/Meting(1,1).ADC.rate)*sec_2_ms);
     end
