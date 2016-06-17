@@ -19,7 +19,7 @@ for cell=1:nr_cells;
     % Plot the current cell and create correpsponding axis labels, 
     % axis values,  legend, title and set the axis
     plot(las_ctrl ,mn_ctrl,'k');
-    plot(las_LTG, mn_LTG, 'r');
+    plot(las_LTG, mn_LTG, 'b');
     xlabel('stimulus intensity (%)');
     ylabel('succes rate');
     legend('control','LTG');

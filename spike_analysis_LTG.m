@@ -33,8 +33,8 @@ for fil = 3:size(ctrl_files);
     ctrl_exper=exper;
     load(LTG_files(fil).name);
     LTG_exper=exper;
-    analysis_ctrl=spike_analysis_opto(ctrl_files(fil).name,'juxta');
-    analysis_LTG=spike_analysis_opto(LTG_files(fil).name,'juxta');
+    analysis_ctrl=spike_analysis(ctrl_files(fil).name,'juxta');
+    analysis_LTG=spike_analysis(LTG_files(fil).name,'juxta');
     
 % Save laser intensities of the stimulations laser
 % Do this for each sweep (new laser intensity).

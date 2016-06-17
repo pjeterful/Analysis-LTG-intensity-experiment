@@ -73,7 +73,7 @@ for node = 1:size(exper,2)
             sens_max = max(exper(1,node).v_rec(1:baseline,repeat)) - ... 
                 mean(exper(1,node).v_rec(1:baseline,repeat));
             std_dev = std(exper(1,node).v_rec(:,repeat));
-            sens =1;%(sens_max * 7) + std_dev * 2 ;
+            sens =20;%(sens_max * 7) + std_dev * 2 ;
         end
         
         analysis{1,node}.spikes{repeat}          = ...

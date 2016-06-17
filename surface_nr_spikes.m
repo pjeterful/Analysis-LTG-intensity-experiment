@@ -9,13 +9,7 @@ for cell=which_cells;
     nr_sweeps=size(analysis_ctrl{1, cell},2)-1;
     nr_stim=size(analysis_ctrl{1, cell}(1).running_average_nr_spikes,1);  
     %Clear all preexisting values
-   clear x
-   clear z
-   clear y
-   clear x_ctrl
-   clear y_ctrl
-   clear z_ctrl
-   clear z_LTG
+   clear x z y x_ctrl y_ctrl z_ctrl z_LTG
 %Create z and y values for ctrl and LTG
     for sweep=1:nr_sweeps;     
         z_ctrl(:,sweep)=analysis_ctrl{1, cell}(sweep+1).running_average_nr_spikes;
@@ -37,10 +31,10 @@ for cell=which_cells;
     %Determing x, y and z, this can be altered if need be.
     x=x_ctrl;
     y=y_ctrl;
-    z=z_LTG;
+    z=z_ctrl-z_LTG;
     %Plot the surface plot and label the axis.
     M=surf(y,x,z);
-    caxis([ 0 2]);
+    caxis([ 0 1]);
     colormap(flipud(autumn(10)));
     ylabel('Laser intensity (%)');
     xlabel('Stimulus number');
