@@ -88,7 +88,7 @@ for fil = 3:size(ctrl_files);
         end
         % LTG files
         for stim = 1:size(analysis_LTG{1, sweep}.spikes{1, repeat})  ;
-        analysis_2_LTG{fil-2}(sweep).spike_peaks{repeat}(stim,1)=...
+            analysis_2_LTG{fil-2}(sweep).spike_peaks{repeat}(stim,1)=...
             analysis_LTG{1, sweep}.spikes{1, repeat}(stim); 
         end
             

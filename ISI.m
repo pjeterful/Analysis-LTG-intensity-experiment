@@ -56,13 +56,13 @@ for cell=[which_cells];
 %DO the same thing for the LTG condition.
             lasertimes_LTG=analysis_LTG{1,cell}(sweep).laser_peaks;
              % Copy the spike times per repeat for ev]ery repeat
-             for repeat=1:size(analysis_LTG{1, cell}(sweep).spike_p.eaks,2);
+             for repeat=1:size(analysis_LTG{1, cell}(sweep).spike_peaks,2);
                  spiketimes_LTG{1,repeat}=analysis_LTG{1,cell}(sweep).spike_peaks{1,repeat};
                 % The number of laser stimulations .
                  for stim=1:size(lasertimes_LTG,1);
                      % Find every spike within the spike window 
                      SAL_LTG=find(spiketimes_LTG{1,repeat} > lasertimes_LTG(stim)...
-                      & spiketimes_LTG{1,repeat} < (lasertimes_LTG(stim) + window))
+                      & spiketimes_LTG{1,repeat} < (lasertimes_LTG(stim) + window));
                   
                        if size(SAL_LTG, 1)<2
                         ISI_LTG{1,repeat}(stim,:)=NaN;

@@ -19,10 +19,10 @@ for cell=1:nr_cells;
     % Plot the current cell and create correpsponding axis labels, 
     % axis values,  legend, title and set the axis
     plot(las_ctrl ,mn_ctrl,'k');
-    plot(las_LTG, mn_LTG, 'b');
+    plot(las_LTG, mn_LTG, 'r');
     xlabel('stimulus intensity (%)');
     ylabel('average nr of spikes');
     legend('control','LTG');
     title(['neuron: ' num2str(cell)]);
-    axis([las_LTG(1), las_LTG(size(las_LTG,1)), 0, 2]);
+    axis([las_LTG(1), las_LTG(size(las_LTG,1)), 0, 3]);
 end
