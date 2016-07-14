@@ -19,10 +19,10 @@ for cell=[which_cells];
     %t=analysis{1, cell}(sweep).laser_peaks(:,1);
     %t=t';
     
-   % x_spike=analysis{1,cell}(sweep).det_peaks{1,repeat}(:,2);
-  %  y_spike=analysis{1,cell}(sweep).det_peaks{1,repeat}(:,3);
+    x_spike=analysis{1,cell}(sweep).spike_peaks{1,repeat}(:,1);
+    y_spike=analysis{1,cell}(sweep).spike_peaks{1,repeat}(:,2);
     hold on
-    plot(analysis{1,cell}(sweep).time, analysis{1,cell}(sweep).spike_trace(:,repeat),'k')
+    plot(analysis{1,cell}(sweep).time, analysis{1,cell}(sweep).spike_trace(:,repeat),'k',x_spike, y_spike, 'ro')
      %plot([t;t],[(ones(size(t))*2-0.5);(zeros(size(t))*2-0.5)],'b-');
     a=num2str(analysis{1, cell}(1).laser_intensity(sweep));
     title(['stimulus intensity: ' a]);
