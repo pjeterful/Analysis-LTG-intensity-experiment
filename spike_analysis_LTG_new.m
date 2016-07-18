@@ -79,9 +79,9 @@ for fil = 3:size(ctrl_files);
             x_ctrl=analysis_ctrl{fil-2}(sweep).time;
             %find the maximum value in the last sweep and save the value
             %and the indice.
-            [M_ctrl,I_ctrl]=max(analysis_ctrl{fil-2}(nr_sweeps).spike_trace(:,repeat));
+            [M_ctrl,I_ctrl]=max(exper_ctrl(nr_sweeps).v_rec(:,repeat));
             %Rename this trace so its indice can be called upon.
-            trace_ctrl=analysis_ctrl{fil-2}(nr_sweeps).spike_trace(:,repeat);
+            trace_ctrl=exper_ctrl(nr_sweeps).v_rec(:,repeat);
             %Suptract the value 10ms before the highest peak from the value
             %of the higest peak, this is the relative spike hight.
             spike_hight_ctrl=M_ctrl-trace_ctrl(I_ctrl-100);
@@ -95,8 +95,8 @@ for fil = 3:size(ctrl_files);
        %Do the same for the LTG condition.
             v_LTG=analysis_LTG{fil-2}(sweep).spike_trace(:,repeat) ;
             x_LTG=analysis_LTG{fil-2}(sweep).time;
-            [M_LTG,I_LTG]=max(analysis_LTG{fil-2}(nr_sweeps).spike_trace(:,repeat));
-            trace_LTG=analysis_LTG{fil-2}(nr_sweeps).spike_trace(:,repeat);
+            [M_LTG,I_LTG]=max(exper_LTG(nr_sweeps).v_rec(:,repeat));
+            trace_LTG=exper_LTG(nr_sweeps).v_rec(:,repeat);
             spike_hight_LTG=M_LTG-trace_LTG(I_ctrl-100);
             delta_LTG=0.75*spike_hight_LTG;
             analysis_LTG{fil-2}(sweep).spike_peaks{repeat}=...
