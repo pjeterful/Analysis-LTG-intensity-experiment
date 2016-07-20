@@ -28,7 +28,14 @@ for cell=[which_cells];
     hold on
     plot(analysis{1,cell}(sweep).time, analysis{1,cell}(sweep).spike_trace(:,repeat),'k',x_spike, y_spike, 'ro')
      %plot([t;t],[(ones(size(t))*2-0.5);(zeros(size(t))*2-0.5)],'b-');
+    if isfield(analysis{1, cell},'elec_intensity')==1   
+    a=num2str(analysis{1, cell}(1).elec_intensity(sweep));
+    end
+    
+    if isfield(analysis{1, cell},'laser_intensity')==1   
     a=num2str(analysis{1, cell}(1).laser_intensity(sweep));
+    end
+    
     title(['stimulus intensity: ' a]);
     end
 end

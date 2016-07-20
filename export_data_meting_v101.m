@@ -12,10 +12,11 @@ function [exper, meta] = export_data_meting_v101(up_folder,down_folder)% ,meta_f
 
 cd(up_folder)
 metingfiles = dir(up_folder);
+metingfiles = metingfiles(~strncmpi('.', {metingfiles.name}, 1));
 
 % Run over the files in distinct folder to extract and save exper and meta
 % On windows you should skip the first two files, on mac first 3.
-for fil = (3+ismac):size(metingfiles,1)
+for fil = 1:size(metingfiles,1)
     cd(up_folder)
     load(metingfiles(fil,1).name)
 
@@ -232,30 +233,53 @@ for fil = (3+ismac):size(metingfiles,1)
             end
         end
     end
+    
+    % In case of an experiment using a stimulus electrode instead of laser
+    % stimulation save the i_dac endtimes of the the stimulus electrode.
+     
+    for channel = 1:size(Meting(1).DAC.scale,1)
+        if strcmp(Meting(1).DAC.scale(channel,1).Units,'uA');
+            for dac_sweeps = 1:meta.nr_sweeps
+                dac_ass      = size(Meting(1,dac_sweeps).cdac{1,channel},1);
+                    for endings = 1:dac_ass
+                        exper(dac_sweeps).stim_l_dac_endtimes            = cumsum(Meting(1,dac_sweeps).cdac{1,channel}(1:endings,1));
+                        exper(dac_sweeps).stim_l_dac_endtimesII          = nan*ones(length(exper(dac_sweeps).stim_l_dac_endtimes)+1,1);
+                        exper(dac_sweeps).stim_l_dac_endtimesII(1,1)     = 0;
+                        exper(dac_sweeps).stim_l_dac_endtimesII(2:end,1) = exper(dac_sweeps).stim_l_dac_endtimes(1:end,1);
+                        exper(dac_sweeps).nr_electrode_stim             = (size(exper(dac_sweeps).stim_l_dac_endtimes,1)-1)/3;
+                    end
+                    for marks = 1:dac_ass
+                        exper(dac_sweeps).electrode_comm((exper(dac_sweeps).stim_l_dac_endtimesII(marks)+1):exper(dac_sweeps).stim_l_dac_endtimesII(marks+1),1) = ...
+                            double(Meting(1,dac_sweeps).cdac{1,channel}(marks,2) * Meting(1,1).DAC.scale(channel,1).User/Meting(1,1).DAC.ints);
+                    end
+            end
+        end
+    end
 
-%     % In the Noise experiments spike detections are used to time the laser
-%     % Use the isfield function to do conditional import of detect and used
-%     % SPIKES.detected are the spikes detected in the 'save' Meting
-%     % SPIKES.used laser application times (can differ per sweep)
-%     % Need to derive the selection that was used, now only the interval can be found. 
-%     % This type of 'saving' is only used in versions of Neuron over V220,
-%     % can be used as a filter (better probably).
-%     for channel = 1:size(Meting,2)
-%         if Meting(1,channel).SPIKES.save == 1 || 0;
-%             for dac_sweep = 1:meta.nr_sweeps
-%                 exper(1,dac_sweep).detected_spike_times = Meting(1,dac_sweep).SPIKES.detect;
-%                 exper(1,dac_sweep).laser_times          = Meting(1,dac_sweep).SPIKES.used;
-%                 % Due to the fact that the selection is missing right now
-%                 % (23/2/15) we need to derive it from these two values above.
-%                 if isempty(exper(1,dac_sweep).detected_spike_times)
-%                     continue
-%                 end
-%                 % Check the possible effect of rounding off!!!
-%                 exper(1,dac_sweep).laser_pretime      = round(exper(1,dac_sweep).laser_times(1,1) - exper(1,dac_sweep).detected_spike_times(1,1));
-%                 exper(1,dac_sweep).AP_selection_times = exper(1,dac_sweep).laser_times - exper(1,dac_sweep).laser_pretime;
-%             end     
-%         end
-%     end
+    % In the Noise experiments spike detections are used to time the laser
+    % Use the isfield function to do conditional import of detect and used
+    % SPIKES.detected are the spikes detected in the 'save' Meting
+    % SPIKES.used laser application times (can differ per sweep)
+    % Need to derive the selection that was used, now only the interval can be found. 
+    % This type of 'saving' is only used in versions of Neuron over V220,
+    % can be used as a filter (better probably).
+
+%    for channel = 1:size(Meting,2)
+%        if isfield(Meting,'SPIKES') == 1;
+%            for dac_sweep = 1:meta.nr_sweeps
+%                exper(1,dac_sweep).detected_spike_times = Meting(1,dac_sweep).SPIKES.detect;
+%                exper(1,dac_sweep).laser_times          = Meting(1,dac_sweep).SPIKES.used;
+%                % Due to the fact that the selection is missing right now
+%                % (23/2/15) we need to derive it from these two values above.
+%               if isempty(exper(1,dac_sweep).detected_spike_times)
+%                   continue
+%                end
+%               % Check the possible effect of rounding off!!!
+%                exper(1,dac_sweep).laser_pretime      = round(exper(1,dac_sweep).laser_times(1,1) - exper(1,dac_sweep).detected_spike_times(1,1));
+%                exper(1,dac_sweep).AP_selection_times = exper(1,dac_sweep).laser_times - exper(1,dac_sweep).laser_pretime;
+%            end     
+%        end
+%    end
 
     % Function here to save the file
     cd(down_folder);
