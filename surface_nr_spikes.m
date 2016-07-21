@@ -68,11 +68,11 @@ if isfield(analysis_ctrl{1, cell},'elec_intensity')==1
     %Determing x, y and z, this can be altered if need be.
     x=x_ctrl;
     y=y_ctrl;
-    z=z_ctrl-z_LTG;
+    z=z_LTG;
     %Plot the surface plot and label the axis.
     M=surf(y,x,z);
-    caxis([ 0 1]);
-    colormap(flipud(autumn(10)));
+    caxis([ 0 3]);
+    colormap(flipud(autumn(15)));
     ylabel('Laser intensity (%)');
     xlabel('Stimulus number');
     zlabel('LTG effect on nr of spikes');
