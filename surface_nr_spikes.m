@@ -6,6 +6,7 @@ function surf_nr_spikes_plot=surface_nr_spikes(analysis_ctrl, analysis_LTG, whic
 
    
 for cell=which_cells;
+    %Use this code if there is laser stimulation
     if isfield(analysis_ctrl{1, cell},'laser_intensity')==1
     nr_sweeps=size(analysis_ctrl{1, cell}(1).laser_intensity  ,1)-1;
     nr_stim=size(analysis_ctrl{1, cell}(1).running_average_nr_spikes,1);  
@@ -28,20 +29,22 @@ for cell=which_cells;
     %Change to vectors
     y_ctrl=y_ctrl';
     z_ctrl=z_ctrl';
-    z_LTG=z_LTG';
+    z_LTG=z_ctrl-z_LTG';
     %Determing x, y and z, this can be altered if need be.
     x=x_ctrl;
     y=y_ctrl;
-    z=z_ctrl-z_LTG;
+    z=z_LTG;
     %Plot the surface plot and label the axis.
     M=surf(y,x,z);
-    caxis([ 0 1]);
-    colormap(flipud(autumn(10)));
+    caxis([ -1.5 1.5]);
+    colormap(jet(15));
     ylabel('Laser intensity (%)');
     xlabel('Stimulus number');
     zlabel('LTG effect on nr of spikes');
     end
     
+    %Use this code if there is electrical stimulation via a stimulus
+    %electrode
 if isfield(analysis_ctrl{1, cell},'elec_intensity')==1
     nr_sweeps=size(analysis_ctrl{1, cell}(1).elec_intensity  ,1)-1;
     nr_stim=size(analysis_ctrl{1, cell}(1).running_average_nr_spikes,1);  
@@ -64,15 +67,15 @@ if isfield(analysis_ctrl{1, cell},'elec_intensity')==1
     %Change to vectors
     y_ctrl=y_ctrl';
     z_ctrl=z_ctrl';
-    z_LTG=z_LTG';
+    z_LTG=z_ctrl';
     %Determing x, y and z, this can be altered if need be.
     x=x_ctrl;
     y=y_ctrl;
-    z=z_LTG;
+    z=z_ctrl;
     %Plot the surface plot and label the axis.
     M=surf(y,x,z);
-    caxis([ 0 3]);
-    colormap(flipud(autumn(15)));
+    caxis([ -3 3]);
+    colormap(jet(10));
     ylabel('Laser intensity (%)');
     xlabel('Stimulus number');
     zlabel('LTG effect on nr of spikes');

@@ -16,8 +16,8 @@ for cell=[which_cells];
     for sweep=[which_traces];
     c=c+1;       
     subplot(nr_sw,1,c);
-    %t=analysis{1, cell}(sweep).laser_peaks(:,1);
-    %t=t';
+    t=analysis{1, cell}(sweep).stimulus_peaks(:,1);
+    t=t';
     if isfield(analysis{1, cell}(sweep), 'spike_peaks')==1
     if isempty(analysis{1, cell}(sweep).spike_peaks{1, repeat})
         x_spike=0;
@@ -31,8 +31,8 @@ for cell=[which_cells];
         y_spike=0;
     end
     hold on
-    plot(analysis{1,cell}(sweep).time, analysis{1,cell}(sweep).spike_trace(:,repeat),'k',x_spike, y_spike, 'ro')
-     %plot([t;t],[(ones(size(t))*2-0.5);(zeros(size(t))*2-0.5)],'b-');
+    plot(analysis{1,cell}(sweep).time, analysis{1,cell}(sweep).spike_trace(:,repeat),'r',x_spike, y_spike, 'ro')
+     plot([t;t],[(ones(size(t))*2-0.5);(zeros(size(t))*2-0.5)],'b-');
     if isfield(analysis{1, cell},'elec_intensity')==1   
     a=num2str(analysis{1, cell}(1).elec_intensity(sweep));
     end
