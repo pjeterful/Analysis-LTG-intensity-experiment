@@ -17,6 +17,7 @@ for cell=1:nr_cells;
     mn_ctrl=analysis_ctrl{1,cell}.mean_succes_rate;
     las_LTG=analysis_LTG{1,cell}.laser_intensity;
     mn_LTG=analysis_LTG{1,cell}.mean_succes_rate;
+    %mn_ctrl=mn_ctrl-mn_LTG;
     % Plot the current cell and create correpsponding axis labels, 
     % axis values,  legend, title and set the axis
     plot(las_ctrl ,mn_ctrl,'k');

@@ -21,7 +21,7 @@ for cell=[which_cells];
             % Calcuate the post stimulus times of all detected laser peaks for
             % the control conditions. Copy the laser times from the analysis struct
             lasertimes_ctrl=analysis_ctrl{1,cell}(sweep).laser_peaks;
-             % Copy the spike times per repeat for ev]ery repeat
+             % Copy the spike times per repeat for every repeat
              for repeat=1:size(analysis_ctrl{1, cell}(sweep).spike_peaks,2);
                  spiketimes_ctrl{1,repeat}=analysis_ctrl{1,cell}(sweep).spike_peaks{1,repeat};
                 % The number of laser stimulations 

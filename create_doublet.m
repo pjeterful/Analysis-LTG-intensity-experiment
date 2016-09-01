@@ -58,6 +58,7 @@
      end
  end
  
+ 
  %Dow the same for the LTG file.
  for cell=1:size(analysis_LTG,2);
      for sweep=1:size(analysis_LTG{1, cell}(1).laser_intensity  ,1)  

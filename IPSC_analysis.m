@@ -36,40 +36,40 @@ for fil = 3:size(ctrl_files);
 % Do this for each sweep (new laser intensity).
         nr_sweeps=size(exper_ctrl,2);
     for sweep=1:nr_sweeps; 
-        analysis_ctrl{fil-2}(1).laser_intensity(sweep,1)=ceil(max(exper_ctrl(1,sweep).laser_int_comm));
-        analysis_LTG{fil-2}(1).laser_intensity(sweep,1)=ceil(max(exper_LTG(1,sweep).laser_int_comm));
+%        analysis_ctrl{fil-2}(1).laser_intensity(sweep,1)=ceil(max(exper_ctrl(1,sweep).laser_int_comm));
+%        analysis_LTG{fil-2}(1).laser_intensity(sweep,1)=ceil(max(exper_LTG(1,sweep).laser_int_comm));
         
 % Save the start times of the laser stimulations per frequency in
 % analysis_2.laser peaks, if the stimulus intensity is 0,fill it with NaN
 
-    for laser = 1:2:exper_ctrl(sweep).nr_laser_stim*2; 
-        if analysis_ctrl{fil-2}(1).laser_intensity(sweep,1)==0;
+ %   for laser = 1:2:exper_ctrl(sweep).nr_laser_stim*2; 
+%        if analysis_ctrl{fil-2}(1).laser_intensity(sweep,1)==0;
         %ctrl files   
-            analysis_ctrl{fil-2}(sweep).laser_peaks(ceil(laser/2),1) = NaN;
+ %           analysis_ctrl{fil-2}(sweep).laser_peaks(ceil(laser/2),1) = NaN;
         %LTG files
-           analysis_LTG{fil-2}(sweep).laser_peaks(ceil(laser/2),1) = NaN; 
-            continue
-        end
+%           analysis_LTG{fil-2}(sweep).laser_peaks(ceil(laser/2),1) = NaN; 
+%            continue
+%        end
         %ctrl files
-            analysis_ctrl{fil-2}(sweep).laser_peaks(ceil(laser/2),1) = ...
-            exper_ctrl(sweep).l_dac_endtimes(laser,1)/10; 
+%            analysis_ctrl{fil-2}(sweep).laser_peaks(ceil(laser/2),1) = ...
+%            exper_ctrl(1,sweep).l_dac_endtimes(laser,1)/10; 
         %LTG files
-            analysis_LTG{fil-2}(sweep).laser_peaks(ceil(laser/2),1) = ...
-            exper_LTG(sweep).l_dac_endtimes(laser,1)/10; 
-    end
+ %           analysis_LTG{fil-2}(sweep).laser_peaks(ceil(laser/2),1) = ...
+ %           exper_LTG(1,sweep).l_dac_endtimes(laser,1)/10; 
+ %   end
     
     %Copy the time from the exper file to the analysis file
     %for ctrl and LTG
     analysis_ctrl{fil-2}(sweep).time=...
-            exper_ctrl(sweep).time;
+            exper_ctrl(1,sweep).time;
     analysis_LTG{fil-2}(sweep).time=...
-            exper_LTG(sweep).time;
+            exper_LTG(1,sweep).time;
     
     %Save the traces of all repeats from the exper file to the anaysis file
     %for ctrl and LTG
     analysis_ctrl{fil-2}(sweep).spike_trace=...
-            exper_ctrl(sweep).i_rec;
+            exper_ctrl(1,sweep).i_rec;
     analysis_LTG{fil-2}(sweep).spike_trace=...
-            exper_LTG(sweep).i_rec; 
+            exper_LTG(1,sweep).i_rec; 
     end
 end

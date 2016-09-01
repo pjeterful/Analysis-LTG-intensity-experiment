@@ -10,4 +10,5 @@ function[analysis_ctrl, analysis_LTG]=complete_analysis(ctrl_folder, LTG_folder,
     [analysis_ctrl, analysis_LTG]=spike_analysis_LTG_new(ctrl_folder, LTG_folder);
     [analysis_ctrl, analysis_LTG]=create_succes_rate(analysis_ctrl, analysis_LTG, window);
     [analysis_ctrl, analysis_LTG]=create_doublet(analysis_ctrl,analysis_LTG,window,frame);
+    [analysis_ctrl,analysis_LTG]=create_SSI(analysis_ctrl,analysis_LTG,window);
 end

@@ -2,8 +2,8 @@
 % For current values of below 0, the weibull fit doesn't comply.
 % Input to function is two vectors (x and y)
 % Output is a fit, two vectors and X50 and Y50 values.
-%[dblThreshold, xThreshold, vecFitX, vecFitY, cFit] = gaussian_fit(currents,freq_values)
-function [dblThreshold, xThreshold, cFit] = gaussian_fit(currents,freq_values)
+
+function [dblThreshold, xThreshold, vecFitX, vecFitY, cFit] = gaussian_fit(currents,freq_values)
 
 % X and Y values of points to perform fit on.
 % Here derive them form the IF_folder_runner function
@@ -20,7 +20,7 @@ vecFitX = 0.01:0.01:500;
 % Fit settings for the Weibull, set to specific range and type.
 % Range of spike frequency is about 0 - 50 Hz, currents 0 - 350 pA
 sFit = fitoptions('Method', 'NonlinearLeastSquares', ...
-    'Lower', [0 0 0 5], 'Upper', [300 100 10 100], 'StartPoint', [50 20 0 20]);
+    'Lower', [0 0 0 0], 'Upper', [70 70 70 70], 'StartPoint', [5 2 0 2]);
 fFit = fittype('(d-c)*(0.5*(1+erf((x-a)/(b*sqrt(2)))))+c', 'options', sFit); 
 % 'Lower' and 'Upper' refer to the minimum and maximum possible fits
 % Startpoint is a guesstimate to start with, so it goes faster.

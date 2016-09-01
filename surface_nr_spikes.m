@@ -29,14 +29,14 @@ for cell=which_cells;
     %Change to vectors
     y_ctrl=y_ctrl';
     z_ctrl=z_ctrl';
-    z_LTG=z_ctrl-z_LTG';
+    z_LTG=z_LTG';
     %Determing x, y and z, this can be altered if need be.
     x=x_ctrl;
     y=y_ctrl;
-    z=z_LTG;
+    z=z_ctrl-z_LTG;
     %Plot the surface plot and label the axis.
     M=surf(y,x,z);
-    caxis([ -1.5 1.5]);
+    caxis([ 0 2]);
     colormap(jet(15));
     ylabel('Laser intensity (%)');
     xlabel('Stimulus number');
@@ -67,14 +67,14 @@ if isfield(analysis_ctrl{1, cell},'elec_intensity')==1
     %Change to vectors
     y_ctrl=y_ctrl';
     z_ctrl=z_ctrl';
-    z_LTG=z_ctrl';
+    z_LTG=z_LTG';
     %Determing x, y and z, this can be altered if need be.
     x=x_ctrl;
     y=y_ctrl;
-    z=z_ctrl;
+    z=z_ctrl-z_LTG;
     %Plot the surface plot and label the axis.
     M=surf(y,x,z);
-    caxis([ -3 3]);
+    caxis([ 0 3]);
     colormap(jet(10));
     ylabel('Laser intensity (%)');
     xlabel('Stimulus number');
