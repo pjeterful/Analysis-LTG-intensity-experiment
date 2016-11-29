@@ -19,13 +19,24 @@ for cell=1:nr_cells;
     mn_LTG=analysis_LTG{1,cell}.mean_nr_spikes;
     % Plot the current cell and create correpsponding axis labels, 
     % axis values,  legend, title and set the axis
-    plot(las_ctrl ,mn_ctrl,'k');
-    plot(las_LTG, mn_LTG, 'r');
+    plot(las_ctrl ,mn_ctrl,'ko','MarkerSize', 4);
+    %plot(las_ctrl ,mn_ctrl-mn_LTG,'k');
+    plot(las_LTG, mn_LTG, 'k^','MarkerSize', 4);
     xlabel('stimulus intensity (%)');
     ylabel('spike probability');
     legend('control','LTG');
     title(['neuron: ' num2str(cell)]);
     axis([las_LTG(1), las_LTG(size(las_LTG,1)), 0, max(mn_ctrl)]);
+    std_mn_nr_ctrl=[];
+    std_mn_nr_LTG=[];
+    for sweep=1:size(analysis_ctrl{1, cell}(1).laser_intensity,1);
+        mn_nr_ctrl=mean(analysis_ctrl{1, cell}(sweep).nr_spikes,2);
+        mn_nr_LTG=mean(analysis_LTG{1, cell}(sweep).nr_spikes,2);
+        std_mn_nr_ctrl(sweep)=std(mn_nr_ctrl);
+        std_mn_nr_LTG(sweep)=std(mn_nr_LTG);
+    end
+   errorbar(las_ctrl ,mn_ctrl,std_mn_nr_ctrl,'k')
+   errorbar(las_LTG ,mn_LTG,std_mn_nr_LTG,'k')
     end
 end
 
@@ -40,8 +51,8 @@ for cell=1:nr_cells;
     mn_LTG=analysis_LTG{1,cell}.mean_nr_spikes;
     % Plot the current cell and create correpsponding axis labels, 
     % axis values,  legend, title and set the axis
-    plot(las_ctrl ,mn_ctrl,'k');
-    plot(las_LTG, mn_LTG, 'r');
+    plot(las_ctrl ,mn_ctrl,'k', 'MarkerSize', 2);
+    plot(las_LTG, mn_LTG, 'r','MarkerSize', 2);
     xlabel('stimulus intensity (%)');
     ylabel('average nr of spikes');
     legend('control','LTG');

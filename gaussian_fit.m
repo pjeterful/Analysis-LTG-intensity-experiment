@@ -3,7 +3,7 @@
 % Input to function is two vectors (x and y)
 % Output is a fit, two vectors and X50 and Y50 values.
 
-function [dblThreshold, xThreshold, vecFitX, vecFitY, cFit] = gaussian_fit(currents,freq_values)
+function [dblThreshold, xThreshold, vecFitX, vecFitY, cFit, gof] = gaussian_fit(currents,freq_values)
 
 % X and Y values of points to perform fit on.
 % Here derive them form the IF_folder_runner function
@@ -28,7 +28,7 @@ fFit = fittype('(d-c)*(0.5*(1+erf((x-a)/(b*sqrt(2)))))+c', 'options', sFit);
 
 % Perform the fit on the vectors added to the fit
 % Calculate the vecFitY for the given fit.
-cFit = fit(vecX', vecY', fFit);
+[cFit, gof] = fit(vecX', vecY', fFit);
 vecFitY = (cFit.d-cFit.c)*(0.5*(1+erf((vecFitX-cFit.a)/(cFit.b*sqrt(2)))))+cFit.c;
 
 %Determine 50% of upper and lower bounds
