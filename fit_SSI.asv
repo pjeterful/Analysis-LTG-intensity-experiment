@@ -1,11 +1,7 @@
 % This function calculates the the angles of the fitted increase of the
 % stimulus spike intervals (SSI) compared to the x-axis, for control and 
 % LTG conditions. inputs are analysis structsfor control and LTG
-% conditions. Outputs are angle structs for control and LTG condition, with
-% the laser intensities in the 1th collumn, the average increase per stimulus pulse
-% in the 2th collumn, the angle of this increase in the 3th collumn, and
-% the SSI's of the first and last stimulus pulse in the 4th and 5th collumn
-%, respectively.
+% conditions. Outputs are angle structs for control and LTG condition, 
 function [angle_ctrl, angle_LTG]=fit_SSI(analysis_ctrl, analysis_LTG)
 nr_cells=size(analysis_ctrl,2);
 for cell =1:nr_cells;
