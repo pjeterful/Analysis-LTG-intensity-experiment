@@ -10,6 +10,7 @@ function [angle_ctrl, angle_LTG]=fit_SSI(analysis_ctrl, analysis_LTG)
 nr_cells=size(analysis_ctrl,2);
 % For each cell
 for cell =1:nr_cells;
+    % start a new count for every cell
     count=0;
     for sweep=1:size(analysis_ctrl{1, cell}(1).laser_intensity  , 1) ;
         % Determine the stimsize
@@ -78,20 +79,39 @@ for cell =1:nr_cells;
             % Both y_ctrl and y_LTG need to contain at least 3 values,
             % otherwise vecors containing only two would have a perfect
             % fit.
-            if size(y_ctrl,2) > 2 && size(y_LTG,2) > 2;            
+            if size(y_ctrl,2) > 2 && size(y_LTG,2) > 2;    
+                % Fit the datapoints from the current intensity (sweep) in
+                % a linear regression model 'poly1' for both control and
+                % LTG conditions.
                 [f_ctrl,gof_ctrl]=fit(x_ctrl',y_ctrl','poly1');
                 [f_LTG, gof_LTG]=fit(x_LTG',y_LTG','poly1'); 
+                % Only include fits that are considered 'good', having a
+                % degree of freedom adjusted R squarred > 0.8.
             if gof_ctrl.adjrsquare>0.8 && gof_LTG.adjrsquare>0.8;
+                % add one to the count for every good fit, the count
+                % determines the indices for each good fitted trace of
+                % SSI's
                 count=count+1;
+                % Determine how many ms the fitted SSI increases with each 
+                % consecutive  stimulus pulse (a_ctrl, a_LTG), from this 
+                % value the angle can be calculated.
                 a_ctrl=f_ctrl(2)-f_ctrl(1);
                 a_LTG=f_LTG(2)-f_ctrl(1);
-            
+                
+                % Put everything in a struct.
+                % The laser intensity
                 angle_ctrl{1,cell}(count,1)=analysis_ctrl{1, cell}(1).laser_intensity(sweep,1);
+                % The angle, calculated by the inverse tanges of a_ctrl
+                % devided by the the x increase (1).
                 angle_ctrl{1,cell}(count,2)=atand(a_ctrl);
+                % The increase
                 angle_ctrl{1,cell}(count,3)=a_ctrl;
+                % The mean first SSI 
                 angle_ctrl{1,cell}(count,4)=mn_SSI_ctrl{1, cell}{sweep,1}(1,1);
+                % The mean last SSI
                 angle_ctrl{1,cell}(count,5)=mn_SSI_ctrl{1, cell}{sweep,1}(1,size(mn_SSI_ctrl{1, cell}{sweep,1},2));
-            
+                
+                %The same for LTG
                 angle_LTG{1,cell}(count,1)=analysis_LTG{1, cell}(1).laser_intensity(sweep,1);
                 angle_LTG{1,cell}(count,2)=atand(a_LTG);
                 angle_LTG{1,cell}(count,3)=a_LTG;
